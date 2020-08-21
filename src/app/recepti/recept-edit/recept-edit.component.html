@@ -1,0 +1,93 @@
+<div class="modal-body row">
+    <div class="col-md-12">
+        <form [formGroup]="receptForma" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button 
+                        type="submit" 
+                        class="btn btn-success"
+                        [disabled]="!receptForma.valid">Sacuvaj</button>
+                    <button type="submit" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="ime">Ime</label>
+                        <input 
+                            type="text" 
+                            id="ime"
+                            formControlName="name"
+                            class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">URL Slike</label>
+                        <input 
+                            type="text" 
+                            id="imagePath"
+                            formControlName="imagePath"
+                            class="form-control"
+                            #imagePath>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <img [src]="imagePath.value" class="img-responsive">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="opis">Opis</label>
+                        <textarea
+                            type="text" 
+                            id="opis"
+                            formControlName="opis"
+                            class="form-control"
+                            rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" formArrayName="ingredients">
+                    <div class="row" 
+                    *ngFor="let ingredientCtrl of controls; let i = index"
+                        [formGroupName]="i"
+                        style="margin-top: 10px; margin-left: 2px;">
+                        <div class="col-xs-8">
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="ime">
+                        </div>
+                        <div class="col-xs-2">
+                            <input 
+                            type="number" 
+                            class="form-control"
+                            formControlName="kolicina">
+                        </div>
+                        <div class="col-xs-2">
+                            <button
+                            class="btn btn-danger"
+                            (click)="obrisiSastojak(i)">X</button>
+                        </div>
+                    </div>   
+                    <hr> 
+                    <div class="row" style="margin-left: 2px;">
+                        <div class="col-sx-12">
+                            <button 
+                                type="button"
+                                class="btn btn-success" 
+                                (click)="dodajSastojak()">Dodaj Sastojak</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
